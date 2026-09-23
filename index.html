@@ -368,7 +368,7 @@
   }
   .panel-imagen img{
     width:100%; height:100%;
-    object-fit: cover;
+    object-fit: contain;
     display:block;
   }
   .panel-imagen .marcador{
@@ -525,6 +525,7 @@ const CONFIG = {
       hora: 0, minuto: 0,
       titulo: "Transmisión I",
       imagen: "imagen-1.jpeg",
+      ancho: 768, alto: 1322,
       tituloAlerta: "⚠️ SYSTEM BOOT // LEVEL 24 ⚠️",
       descripcion: "Spartan CRKDIEGO, tu misión de hoy acaba de comenzar.\nMantente atento."
     },
@@ -532,6 +533,7 @@ const CONFIG = {
       hora: 16, minuto: 30,
       titulo: "Transmisión II",
       imagen: "imagen-2.jpeg",
+      ancho: 911, alto: 1599,
       tituloAlerta: "⚠️ NEW ITEMS DETECTED ⚠️",
       descripcion: "Parece que algunos suministros decidieron adelantarse a la misión."
     },
@@ -539,6 +541,7 @@ const CONFIG = {
       hora: 20, minuto: 0,
       titulo: "Transmisión III",
       imagen: "imagen-3.jpeg",
+      ancho: 768, alto: 1376,
       tituloAlerta: "⚠️ NAVIGATION DATA RECEIVED ⚠️",
       descripcion: "Coordenadas de destino desbloqueadas.\nIntroduce las coordenadas en tu navegador y sigue la ruta hasta el punto de reabastecimiento.\nCOORDINATES: XX.XXXX"
     },
@@ -546,6 +549,7 @@ const CONFIG = {
       hora: 21, minuto: 0,
       titulo: "Transmisión IV",
       imagen: "imagen-4.jpeg",
+      ancho: 768, alto: 1316,
       tituloAlerta: "⚠️ CLASSIFIED CONTENT ⚠️",
       descripcion: "No todas las recompensas aparecen en el menú principal."
     },
@@ -553,6 +557,7 @@ const CONFIG = {
       hora: 22, minuto: 0,
       titulo: "Transmisión V",
       imagen: "imagen-5.jpeg",
+      ancho: 893, alto: 1600,
       tituloAlerta: "⚠️ FINAL REWARD UNLOCKED ⚠️",
       descripcion: "Una nueva campaña te espera, Spartan.\nQue disfrutes la aventura. 🎮\n¡Feliz cumpleaños, Spartan!"
     }
@@ -682,6 +687,10 @@ function construirNav(indiceMostrado){
 
 function mostrarPanel(i){
   const t = CONFIG.transmisiones[i];
+
+  if (t.ancho && t.alto){
+    panelImagenWrap.style.aspectRatio = t.ancho + " / " + t.alto;
+  }
 
   panelImagenWrap.querySelectorAll("img, .placeholder-imagen").forEach(el => el.remove());
 

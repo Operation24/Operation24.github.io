@@ -216,11 +216,14 @@
   /* ---------- slots de transmisiones ---------- */
   .slots{
     display:grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 14px;
     margin-bottom: 30px;
   }
-  @media (max-width: 560px){
+  @media (max-width: 700px){
+    .slots{ grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 420px){
     .slots{ grid-template-columns: repeat(2, 1fr); }
   }
 
@@ -404,6 +407,7 @@
     color: var(--text);
     font-size: 15.5px;
     margin: 0;
+    white-space: pre-line;
   }
 
   .panel-nav{
@@ -501,43 +505,56 @@
 /* =========================================================================
    CONFIGURA AQUÍ TU PÁGINA
    -------------------------------------------------------------------------
-   1. "transmisiones": cambia hora/minuto de desbloqueo, la ruta de la
-      imagen y la descripción de cada una. Todas las imágenes (imagen-1.jpeg,
-      imagen-2.jpeg, etc. y dieguinfondo.png) van en la MISMA carpeta que
-      este index.html.
+   1. "transmisiones": cambia hora/minuto de desbloqueo (SIEMPRE en formato
+      24 horas: 16:30 = hora 16, minuto 30; 8:00 pm = hora 20, minuto 0),
+      la ruta de la imagen, el título de alerta y la descripción de cada
+      una. Todas las imágenes (imagen-1.jpeg ... imagen-5.jpeg, etc.) van
+      en la MISMA carpeta que este index.html. La imagen 1 usa hora 0,
+      minuto 0 para quedar siempre desbloqueada desde el inicio.
    2. Si aún no tienes una imagen, no pasa nada: se muestra un marcador
       temporal en su lugar hasta que subas el archivo real.
    3. Para PROBAR la página sin esperar a la hora real, agrega a la URL
-      "?hora=17" o "?hora=17&minuto=30" (reemplaza los valores). Por
-      ejemplo: index.html?hora=21
+      "?hora=20" o "?hora=16&minuto=30" (reemplaza los valores, siempre
+      en formato 24h). Por ejemplo: index.html?hora=22
    ========================================================================= */
 const CONFIG = {
   nombreAmigo: "Diego",
   edad: 24,
   transmisiones: [
     {
-      hora: 9, minuto: 0,
+      hora: 0, minuto: 0,
       titulo: "Transmisión I",
       imagen: "imagen-1.jpeg",
-      descripcion: "Descripción pendiente: aquí va el texto que preparó su pareja para esta primera imagen."
+      tituloAlerta: "⚠️ SYSTEM BOOT // LEVEL 24 ⚠️",
+      descripcion: "Spartan CRKDIEGO, tu misión de hoy acaba de comenzar.\nMantente atento."
     },
     {
-      hora: 13, minuto: 0,
+      hora: 16, minuto: 30,
       titulo: "Transmisión II",
       imagen: "imagen-2.jpeg",
-      descripcion: "Descripción pendiente para la segunda imagen."
+      tituloAlerta: "⚠️ NEW ITEMS DETECTED ⚠️",
+      descripcion: "Parece que algunos suministros decidieron adelantarse a la misión."
     },
     {
-      hora: 17, minuto: 0,
+      hora: 20, minuto: 0,
       titulo: "Transmisión III",
       imagen: "imagen-3.jpeg",
-      descripcion: "Descripción pendiente para la tercera imagen."
+      tituloAlerta: "⚠️ NAVIGATION DATA RECEIVED ⚠️",
+      descripcion: "Coordenadas de destino desbloqueadas.\nIntroduce las coordenadas en tu navegador y sigue la ruta hasta el punto de reabastecimiento.\nCOORDINATES: XX.XXXX"
     },
     {
       hora: 21, minuto: 0,
       titulo: "Transmisión IV",
       imagen: "imagen-4.jpeg",
-      descripcion: "Descripción pendiente para la cuarta imagen."
+      tituloAlerta: "⚠️ CLASSIFIED CONTENT ⚠️",
+      descripcion: "No todas las recompensas aparecen en el menú principal."
+    },
+    {
+      hora: 22, minuto: 0,
+      titulo: "Transmisión V",
+      imagen: "imagen-5.jpeg",
+      tituloAlerta: "⚠️ FINAL REWARD UNLOCKED ⚠️",
+      descripcion: "Una nueva campaña te espera, Spartan.\nQue disfrutes la aventura. 🎮\n¡Feliz cumpleaños, Spartan!"
     }
   ]
 };
@@ -681,7 +698,7 @@ function mostrarPanel(i){
   panelImagenWrap.insertBefore(img, panelMarcador);
 
   panelMarcador.textContent = t.titulo;
-  panelTitulo.textContent = t.titulo;
+  panelTitulo.textContent = t.tituloAlerta || t.titulo;
   panelDescripcion.textContent = t.descripcion;
 
   panel.classList.add("visible");
